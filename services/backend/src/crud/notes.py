@@ -1,9 +1,9 @@
 from fastapi import HTTPException
 from tortoise.exceptions import DoesNotExist
 
-from database.models import Notes
-from schemas.notes import NoteOutSchema
-from schemas.token import Status
+from src.database.models import Notes
+from src.schemas.notes import NoteOutSchema
+from src.schemas.token import Status
 
 
 async def get_notes():
