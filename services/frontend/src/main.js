@@ -1,24 +1,25 @@
-import "bootstrap/dist/css/bootstrap.css";
-import axios from "axios";
-import Vue from "vue";
+import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
+import Vue from 'vue';
 
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import App from './App.vue';
+import router from './router';
+import store from './store';
+
 
 axios.defaults.withCredentials = true;
-// fastapi backend
-axios.defaults.baseURL = "http://localhost:5000/";
+axios.defaults.baseURL = 'http://localhost:5000/';  // the FastAPI backend
 
 Vue.config.productionTip = false;
 
+// NEW
 axios.interceptors.response.use(undefined, function (error) {
   if (error) {
     const originalRequest = error.config;
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      store.dispatch("logout");
-      return router.push("/login");
+      store.dispatch('logOut');
+      return router.push('/login')
     }
   }
 });
@@ -26,5 +27,5 @@ axios.interceptors.response.use(undefined, function (error) {
 new Vue({
   router,
   store,
-  render: (h) => h(App),
-}).$mount("#app");
+  render: h => h(App)
+}).$mount('#app');
