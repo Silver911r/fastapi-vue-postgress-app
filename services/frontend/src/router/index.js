@@ -1,12 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+import store from "@/store";
+
 import Dashboard from "@/views/Dashboard.vue";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import Note from "@/views/Note.vue";
 import Profile from "@/views/Profile";
 import Register from "@/views/Register.vue";
+import EditNote from "@/views/EditNote.vue";
 
 Vue.use(VueRouter);
 
@@ -45,6 +48,13 @@ const routes = [
     meta: { requiresAuth: true },
     props: true,
   },
+  {
+    path: "/note/:id",
+    name: "EditNote",
+    component: EditNote,
+    meta: { requiresAuth: true },
+    props: true,
+  },
 ];
 
 const router = new VueRouter({
@@ -53,4 +63,15 @@ const router = new VueRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (store.getters.isAuthenticated) {
+      next();
+      return;
+    }
+    next("/login");
+  } else {
+    next();
+  }
+});
 export default router;
