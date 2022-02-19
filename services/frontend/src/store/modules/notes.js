@@ -7,7 +7,7 @@ const state = {
 
 const getters = {
   stateNotes: (state) => state.notes,
-  stateNotes: (state) => state.note,
+  stateNote: (state) => state.note,
 };
 
 const actions = {
@@ -37,7 +37,7 @@ const mutations = {
   setNotes(state, notes) {
     state.notes = notes;
   },
-  setnote(state, note) {
+  setNote(state, note) {
     state.note = note;
   },
 };
