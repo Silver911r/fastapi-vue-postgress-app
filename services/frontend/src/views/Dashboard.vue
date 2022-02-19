@@ -26,13 +26,15 @@
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
     </section>
+
     <br /><br />
 
     <section>
       <h1>Notes</h1>
       <hr />
       <br />
-      <div v-if="notes">
+
+      <div v-if="notes.length">
         <div v-for="note in notes" :key="note.id" class="notes">
           <div class="card" style="width: 18rem">
             <div class="card-body">
@@ -47,10 +49,12 @@
               </ul>
             </div>
           </div>
+          <br />
         </div>
       </div>
+
       <div v-else>
-        <p>Nothing to see. Add some notes.</p>
+        <p>Nothing to see. Check back later.</p>
       </div>
     </section>
   </div>
